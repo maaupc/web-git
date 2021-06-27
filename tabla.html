@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <title>Heroes</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+          <img src="img/A-64.png" width="30" height="30" alt="icono" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./cargar.html">Cargar</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="./tabla.html">Tabla</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="container animate__animated animate__fadeIn">
+        <div class="row mt-5">
+          <div class="col">
+            <h1>Tabla de Héroes</h1>
+            <hr />
+          </div>
+        </div>
+        <div class="row m-5">
+          <div class="col col-md">
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Alias</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Poder</th>
+                  <th scope="col">Equipo</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="cuerpoTabla"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+<!-- Modal -->
+<div class="modal fade" id="heroeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="title_modal">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Card -->
+        <div class="card mb-3" style="max-width: 540px">
+          <div class="row no-gutters">
+            <div class="col-md-4 pt-3">
+              <img id="imagen_heroe" src="" alt="imagen" />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  <strong>Poder: </strong><span id="text_poder"></span>
+                </p>
+                <p class="card-text">
+                  <strong>Equipo: </strong><span id="text_equipo"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- fin card -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Termina modal de ver heroe -->
+
+<!-- Modal de modificar heroe -->
+<div class="modal fade" id="modifModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modif_title">Modif title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form onsubmit="updateHeroe(event)">
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" class="form-control" id="nombreModif" name="nombre" onchange="handleChange(event)">
+          </div>
+          <div class="form-group">
+            <label>Poder</label>
+            <input type="text" class="form-control" id="poderModif" name="poder" onchange="handleChange(event)">
+          </div>
+          <div class="form-group">
+            <label>Equipo</label>
+            <input type="text" class="form-control" id="equipoModif" name="equipo" onchange="handleChange(event)">
+          </div>
+          <div class="form-group">
+            <label>Imagen</label>
+            <input type="text" class="form-control" id="imagenModif" name="imagen" onchange="handleChange(event)">
+          </div>
+
+          <button class="btn btn-outline-info btn-block">Actualizar</button>
+
+        </form>
+        
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin del modal de modificar heroe -->
+
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://use.fontawesome.com/a79dcfd0b0.js"></script>
+    <script src="app.js"></script>
+    
+  </body>
+</html>
